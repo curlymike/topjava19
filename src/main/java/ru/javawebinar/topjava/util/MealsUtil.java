@@ -36,12 +36,12 @@ public class MealsUtil {
                 );
 
         return meals.stream()
-                .filter(meal -> TimeUtil.isBetweenInclusive(meal.getTime(), startTime, endTime))
+                .filter(meal -> TimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
                 .map(meal -> createTo(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
     }
 
-    private static MealTo createTo(Meal meal, boolean excess) {
+    public static MealTo createTo(Meal meal, boolean excess) {
         return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
 }

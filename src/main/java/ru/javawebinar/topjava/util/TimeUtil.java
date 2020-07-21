@@ -13,4 +13,9 @@ public class TimeUtil {
     public static String toString(LocalDateTime ldt) {
         return ldt == null ? "" : ldt.format(DATE_TIME_FORMATTER);
     }
+
+    public static LocalDateTime parse(String str) {
+        return LocalDateTime.parse(str, DATE_TIME_FORMATTER);
+    }
+
 }

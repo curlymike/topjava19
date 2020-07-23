@@ -14,6 +14,11 @@
         .excess {
             color: red;
         }
+
+        .auth-user-id {
+            margin: 20px 0 10px 0;
+        }
+
     </style>
 </head>
 <body>
@@ -34,7 +39,7 @@
         </tr>
         </thead>
         <c:forEach items="${meals}" var="meal">
-            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
+            <jsp:useBean id="meal" type="ru.javawebinar.topjava.to.MealTo"/>
             <tr class="${meal.excess ? 'excess' : 'normal'}">
                 <td>
                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
@@ -50,5 +55,18 @@
         </c:forEach>
     </table>
 </section>
+<div class="auth-user-id">
+    <div>authUserId: ${authUserId}</div>
+</div>
+<div class="user-id-form">
+    <form id="form-new-user-id" method="post" action="meals">
+        <label for="new-user-id">Set user Id to:</label>
+        <select id="new-user-id" name="new-user-id"><c:forEach items="${userIds}" var="userId">
+            <option value="${userId}" <c:if test="${authUserId eq userId}">selected="selected"</c:if> >${userId}</option>
+        </c:forEach></select>
+        <input type="hidden" name="op" value="change-auth-user-id" />
+        <input type="submit" value="Submit" />
+    </form>
+</div>
 </body>
 </html>

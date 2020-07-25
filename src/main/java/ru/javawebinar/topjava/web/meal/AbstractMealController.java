@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
@@ -45,6 +46,11 @@ public abstract class AbstractMealController {
     public Collection<Meal> getAll(Integer userId) {
         log.info("getAll ({})", userId);
         return service.getAll(userId);
+    }
+
+    public Collection<Meal> getAll(Integer userId, LocalDate from, LocalDate to) {
+        log.info("getAll ({})", userId);
+        return service.getAll(userId, from, to);
     }
 
 }

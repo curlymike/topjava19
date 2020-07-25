@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -65,10 +67,17 @@ public class InMemoryMealRepository implements MealRepository {
         // 3.3: список еды возвращать
         // отсортированный в обратном порядке по датам.
         return repository.entrySet().stream()
-            .filter((pair) -> pair.getValue().getUserId().equals(userId))
-            .map(Map.Entry::getValue)
-            .sorted(Comparator.comparing(Meal::getDate).reversed()) // This is cool :-]
-            .collect(Collectors.toList());
+                .filter((pair) -> pair.getValue().getUserId().equals(userId))
+                .map(Map.Entry::getValue)
+                .sorted(Comparator.comparing(Meal::getDate).reversed()) // This is cool :-]
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Meal> getAll(Integer userId, LocalDate dateFrom, LocalDate dateTo) {
+        return getAll(userId).stream()
+                .filter((meal) -> DateTimeUtil.isBetween(meal.getDate(), dateFrom, dateTo))
+                .collect(Collectors.toList());
     }
 
 }

@@ -1,9 +1,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Meal</title>
+
+    <!--<link rel="stylesheet" type="text/css" href="/static/pure-min.css" />-->
+    <!-- https://xdsoft.net/jqplugins/datetimepicker/ -->
+    <link rel="stylesheet" type="text/css" href="/static/jquery.datetimepicker.min.css" />
+    <script src="/static/jquery.js"></script>
+    <script src="/static/jquery.datetimepicker.full.min.js"></script>
+
+    <script>
+        (function ($) {
+            $(document).ready(function() {
+                $('.datetimepicker').datetimepicker({
+                    format:'Y-m-d H:i',
+                    lang:'ru'
+                });
+            });
+        })(jQuery);
+    </script>
+
     <style>
         dl {
             background: none repeat scroll 0 0 #FAFAFA;

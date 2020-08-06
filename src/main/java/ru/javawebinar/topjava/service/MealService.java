@@ -11,6 +11,7 @@ import java.util.List;
 import static ru.javawebinar.topjava.util.DateTimeUtil.getEndExclusive;
 import static ru.javawebinar.topjava.util.DateTimeUtil.getStartInclusive;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
+import static ru.javawebinar.topjava.util.ValidationUtil.checkNotNew;
 
 @Service
 public class MealService {
@@ -38,6 +39,7 @@ public class MealService {
     }
 
     public void update(Meal meal, int userId) {
+        checkNotNew(meal);
         checkNotFoundWithId(repository.save(meal, userId), meal.getId());
     }
 
